@@ -11,6 +11,19 @@ getATND <- function(username=NULL){
   return(res)
 }
 
+getEventUsers <- function(eventid=NULL){
+  require(jsonlite)
+  require(RCurl)
+  if(is.null(eventid)){
+    stop("eventid is required")
+  }
+  url <- "http://api.atnd.org/events/users/?event_id=%s&format=json"
+  s <- sprintf(url, eventid)
+  res <- getURL(s)
+  res <- fromJSON(res)$event$users[[1]]
+  return(res)
+}
+
 getTwilog <- function(username=NULL){
   require(XML)
   require(RCurl)
