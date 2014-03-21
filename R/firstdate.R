@@ -40,7 +40,9 @@ getTwilog <- function(username=NULL){
   invisible(result)
 }
 
-getFacebook("username"){}
+getFacebook <- function(user){
+  return(user)
+}
 
 getTwitter <- function(user, key, secret){
   require(httr)
@@ -68,9 +70,14 @@ getTwitter <- function(user, key, secret){
   invisible(result)
 }
 
-sayTweetMac <- function(tweetdata, var="text",interval=3){
+sayTweet <- function(tweetdata, var="text", voice="Kyoko", interval=3){
+  if(Sys.info()["sysname"]!="Darwin"){
+    stop("This function is Mac only...")
+  }
   for(i in seq_len(nrow(tweetdata))){
-    system(paste("say -v Kyoko",tweetdata[i,var]));Sys.sleep(interval)}
+    system(paste("say -v", voice, tweetdata[i,var]))
+    Sys.sleep(interval)
+  }
 }
 
 visTL <- function(tweetdata, group="name", path="sample.html"){

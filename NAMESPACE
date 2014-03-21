@@ -1,1 +1,5 @@
-export(getTwilog,getATND)
+export(getATND)
+export(getTwilog)
+export(getTwitter)
+export(sayTweet)
+export(visTL)
