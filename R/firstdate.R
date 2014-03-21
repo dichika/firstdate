@@ -60,6 +60,7 @@ getFacebook <- function(user){
 getTwitter <- function(user, key, secret){
   require(httr)
   require(rjson)
+  require(plyr)
   myapp <- oauth_app("twitter", 
                      key = key, 
                      secret = secret)
@@ -102,7 +103,7 @@ visTL <- function(tweetdata, group="name", path="sample.html"){
            forceY=paste0("#![",min(tweetdata$tmp)-1, ",", max(tweetdata$tmp)+1, "]!#")
            )
   n1$xAxis(tickFormat = "#!function(d) {return d3.time.format('%m-%d %H')(new Date( d * 1000 ));}!#")
-  n1$save("sample.html")
+  n1$save("sample.html", cdn=TRUE)
   tmp <- paste(readLines(path, warn=FALSE), collapse="\n")
   tmp <- gsub("<style>.+</style>","<style>
     .rChart {
