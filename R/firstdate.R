@@ -217,10 +217,10 @@ getHealthGraph <- function(key, secret){
   resjson
 }
 
-visCloud <- function(dat, var="text", fontfamily="HiraKakuProN-W3", minF=3, trg=c("名詞","動詞")){
+visCloud <- function(dat, var="text", fontfamily="HiraKakuProN-W3", minF=3, trg=c("名詞","動詞"), ...){
   require(wordcloud)
   require(RMeCab)
-  pieces <- unlist(lapply(dat[,var], function(x)RMeCabC(x)))
+  pieces <- unlist(lapply(dat[,var], function(x)RMeCabC(x, ...)))
   pieces <- pieces[((names(pieces) %in% trg) & (nchar(pieces>1))) & !(grepl("[[:alnum:]]|[[:punct:]]",pieces))]
   piecesDF <- data.frame(table(pieces))
   par(family=fontfamily)
